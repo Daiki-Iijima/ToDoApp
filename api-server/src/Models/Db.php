@@ -13,8 +13,10 @@ class DB{
   //  データベース名
   private $dbname = 'todo_db';
 
+  private $charset = 'utf8';
+
   public function connect(){
-    $conn_str = "mysql:host=$this->host;dbname=$this->dbname";
+    $conn_str = "mysql:host=$this->host;dbname=$this->dbname;charset=$this->charset";
     $conn = new PDO($conn_str,$this->user,$this->pass);
     $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
