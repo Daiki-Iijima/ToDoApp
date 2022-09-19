@@ -30,14 +30,15 @@ class DbGetController
       $customers = $stmt->fetchAll(PDO::FETCH_OBJ);
       $db = null;
 
-      $response->getBody()->write(json_encode($customers));
+      //  JSON_UNESCAPED_UNICODE : これを入れないと、JsonがUnicodeとして変換される
+      $response->getBody()->write(json_encode($customers,JSON_UNESCAPED_UNICODE));
       return $response;
     }catch(PDOException $e){
       $error = array(
         "message" => $e->getMessage()
       );
 
-      $response->getBody()->write(json_encode($error));
+      $response->getBody()->write(json_encode($error,JSON_UNESCAPED_UNICODE));
       return $response
         ->withHeader('content-type','application/json')
         ->withStatus(500);
